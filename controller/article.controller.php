@@ -117,7 +117,7 @@ class ArticleController extends Controller{
 			header('Location:../error/error_authornotexists.html');
 		}
 		$this->view->category_info = $category_info;
-		//$this->view->display(__CLASS__, __FUNCTION__);
+		$this->view->display(__CLASS__, __FUNCTION__);
 	}
 	
 	/**
@@ -130,7 +130,8 @@ class ArticleController extends Controller{
 		if(!isset($array_info)){
 			header('Location:index');
 		}
-		$category_article = $this->article->articleModel_queryCategoryArticle((int)$array_info['categoryid']);
+		var_dump($array_info['categoryid']);
+		$category_article = $this->article->articleModel_queryCategoryArticle($array_info['categoryid']);
 		foreach($category_article as $key=>$value){
 			if(isset($value)){
 				if(isset($value['summary'])){

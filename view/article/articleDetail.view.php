@@ -7,18 +7,13 @@ PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
 	</head>
 	<body>
 		<div class="for-navbar">
-			<?php include_once('navbar.view.php'); ?>
+			<?php include_once(WEBROOT.'view/navbar.view.php'); ?>
 		</div>
 		<div class="container">
 			<div class="for-header">
-				<?php include_once(WEBROOT.'header.view.php'); ?>
+				<?php include_once(WEBROOT.'view/header.view.php'); ?>
 			</div>
 			<div class="content">
-				<div class="width width3">
-					<div class="for-sidebar">
-						<?php include_once('sidebar.view.php'); ?>
-					</div>
-				</div>
 				<div class="width width7 wall">
 					<div class="gradient-wall"></div>
 					<?php
@@ -50,7 +45,11 @@ PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
 								  '</div>';
 					?>
 				</div>
-				
+				<div class="width width3">
+					<div class="for-sidebar">
+						<?php include_once('sidebar.view.php'); ?>
+					</div>
+				</div>
 			</div>
 			<div class="for-copyright">
 				<?php include_once(WEBROOT.'view/copyright.view.php'); ?>

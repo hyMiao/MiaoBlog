@@ -27,7 +27,7 @@
 			<?php
 				$category_info = $this->category_info;
 				foreach($category_info as $value){
-					print '<li class="blog-category-item"><a href="categoryDetail?categoryid='.$value['categoryid'].'">'.$value['categoryname'].'</a></li>';
+					print '<li class="blog-category-item"><a href="categoryDetail?categoryid='.$value['categoryid'].'">'.$value['categoryname'].'('.$value['article_count'].')</a></li>';
 				}
 			?>
 		</ul>

@@ -7,7 +7,7 @@ PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
 	</head>
 	<body>
 		<div class="for-navbar">
-			<?php include_once('navbar.view.php'); ?>
+			<?php include_once(WEBROOT.'view/navbar.view.php'); ?>
 		</div>
 		<div class="container">
 			<div class="for-header">
@@ -61,9 +61,9 @@ PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
 							}
 						}else{
 							if($current_page > $page_amount){
-								print '<div>喂喂喂- -没有这一页哦！</div>';
+								print '<div class="article-none">喂喂喂- -没有这一页哦！</div>';
 							}else{
-								print '<div>这里没有文章哦~！</div>';
+								print '<div class="article-none">这里没有文章哦~！</div>';
 							}
 						}
 					?>

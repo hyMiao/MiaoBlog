@@ -66,12 +66,18 @@ body{
 }
 .header .navbar li a{
 	color:rgb(77, 81, 99);
-	font:normal 15px/18px 'Microsoft YaHei';
+	font:normal 15px/18px 'Microsoft YaHei', Arial;
 	text-shadow:2px 2px 3px #adabb7;
 }
 .header .navbar li span{
 	display:block;
-	font:normal 12px/18px 'Microsoft YaHei';
+	font:normal 12px/18px 'Microsoft YaHei', Arial;
+}
+
+.article-none{
+	height:600px;
+	text-shadow:1px 2px 2px #aaaaaa;
+	color:rgb(0, 10, 56);
 }
 .blog-article-info , .blog-site-info{
 	margin-left:2.5em;
@@ -271,11 +277,17 @@ body{
 	color:rgba(59, 68, 102, 0.75);
 }
 .blog-sidebar-list a:hover {
+	text-decoration:underline;
 	color:rgb(10, 45, 189);
 }
 .blog-sidebar-list li{
 	margin:0 5px 0 -10px;
 	border-bottom:1px dotted #cccccc;
+}
+
+.blog-categoryInfo{
+	width:60%;
+	margin:0 30px;
 }
 
 .blog-table  tr td {

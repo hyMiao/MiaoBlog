@@ -7,20 +7,22 @@ PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
 	</head>
 	<body>
 		<div class="for-navbar">
-			<?php include_once('navbar.view.php'); ?>
+			<?php include_once(WEBROOT.'view/navbar.view.php'); ?>
 		</div>
 		<div class="container">
-			<div class="header">
+			<div class="for-header">
+				<?php include_once(WEBROOT.'view/header.view.php'); ?>
 			</div>
 			<div class="content">
-				<div class="width width7">
+				<div class="width width7 wall">
+					<div class="gradient-wall"></div>
 					<?php
 						$articles = $this->category_article;
 						if(!empty($articles)){
 							foreach($articles as $article){
 								//var_dump($article);
 								if(!isset($article['label'])){
-									$article['label'] = '无';
+									$article['label'] = '无标签';
 								}
 								print '<div class="blog-article-info">'.
 										 '<div class="article-title">'.
@@ -46,7 +48,7 @@ PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
 									 '</div><br />';
 							}
 						}else{
-							print '<div>他还没有写过任何文章哦~！</div>';
+							print '<div class="article-none">这个分类下还没有任何文章哦~！</div>';
 						}
 					?>
 				</div>
