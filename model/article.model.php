@@ -188,7 +188,6 @@ class ArticleModel extends Model{
 	 */
 	function articleModel_queryCategoryArticle($categoryid = null){
 		$sql = 'SELECT * FROM blog_article WHERE categoryid = '.$categoryid;
-		var_dump($sql);
 		$result = $this->pdodbh->db_query($sql);
 		
 		return $result;

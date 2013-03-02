@@ -14,7 +14,8 @@
  */
 
 define('INSTALL_ACCOMPLISH', true);
-define('ARTICLE_AMOUNT_PERPAGE', 2);
+define('ARTICLE_AMOUNT_PERPAGE', 10);
+define('CATEGORY_AMOUNT_PERPAGE', 20);
 
 define('WEBROOT', str_replace('\\', '/', dirname(dirname(__FILE__))).'/');
 define('TIMEZONE', 'Asia/Shanghai');

@@ -14,6 +14,7 @@
  */
 class ArticleController extends Controller{
 	private $article = null;
+	private $categroy_info = null;
 	private $login_user_info = null;
 	private $login_site_info = null;
 	
@@ -34,12 +35,13 @@ class ArticleController extends Controller{
 			$this->view->login_user_info = $login_user_info;
 		}
 		
-		$this->categoryInfo();
+		$this->category_info = $this->article->articleModel_queryCategoryInfo();
+		$this->view->category_info = $this->category_info;
 	}
 	
 	function index(){
 		$array_info = $this->getInfo($_SERVER['QUERY_STRING']);
-		if(!isset($array_info['page'])){
+		if((!isset($array_info['page']))||($array_info['page'] == '')){
 			$array_info['page'] = 1;
 		}
 		$article_tmp = $this->article->articleModel_getArticleInfo('all', array());
@@ -65,45 +67,10 @@ class ArticleController extends Controller{
 			$article_view[$j] = $article_tmp[$i];
 			//var_dump($article_view[$j]['articleid']);
 		}
-		//var_dump($article_view);
-		/*
-		foreach($article_tmp as $key=>$value){
-			if(isset($value)){
-				if(isset($value['summary'])){
-					if(strlen($value['summary']) < 150){
-						$str_tmp = ($value['summary']).'<br />'.'<br />'.($value['content']);
-						if(strlen($str_tmp) >= 200){
-							$i = 199;
-							while($str_tmp[$i] != '>')
-								$i = $i + 1;
-							$article_tmp[$key]['summary'] = substr($str_tmp, 0, $i);
-							$article_tmp[$key]['summary'] = ($article_tmp[$key]['summary']).'...'; 
-						}else{
-							$article_tmp[$key]['summary'] = $str_tmp;
-						}
-					}
-				}
-				if((!isset($value['summary']))||($value['summary'] === '')){
-					if(strlen($value['content']) >= 200){
-						$i = 199;
-						while($value['content'][$i] != '>')
-							$i = $i + 1;
-						$article_tmp[$key]['summary'] = substr($value['content'], 0, $i + 1);
-					}else
-						$article_tmp[$key]['summary'] = $value['content'];
-				}
-				unset($value['content']);
-				
-				if((!isset($value['summary']))||($value['summary'] === '')){
-					$article_tmp[$key]['summary'] = $value['content'];
-				}
-			}	
-			$article_tmp[$key]['categoryid'] = $this->handleArticleCategory($value['categoryid']);
-		}*/
 		$this->view->article = $article_view;
 		$this->view->article_amount = count($article_tmp);
 		
-		$this->view->display(__CLASS__, __FUNCTION__);
+		$this->view->display(__CLASS__, 'index');
 	}
 	
 	/**
@@ -112,11 +79,12 @@ class ArticleController extends Controller{
 	 *		用于查询用户的文章分类情况
 	 */
 	function categoryInfo(){
-		$category_info = $this->article->articleModel_queryCategoryInfo();
+		$category_info = $this->category_info;
 		if(!isset($category_info)){
 			header('Location:../error/error_authornotexists.html');
 		}
-		$this->view->category_info = $category_info;
+		$category_count = count($category_info);
+		$this->view->page_amount = ceil($category_count / CATEGORY_AMOUNT_PERPAGE);
 		$this->view->display(__CLASS__, __FUNCTION__);
 	}
 	
@@ -127,39 +95,44 @@ class ArticleController extends Controller{
 	 */
 	function categoryDetail(){
 		$array_info = $this->getInfo($_SERVER['QUERY_STRING']);
-		if(!isset($array_info)){
+		if(!isset($array_info['categoryid'])){
 			header('Location:index');
 		}
-		var_dump($array_info['categoryid']);
+		if((!isset($array_info['page']))||($array_info['page'] == '')){
+			$array_info['page'] = 1;
+		}
 		$category_article = $this->article->articleModel_queryCategoryArticle($array_info['categoryid']);
-		foreach($category_article as $key=>$value){
-			if(isset($value)){
-				if(isset($value['summary'])){
-					if(strlen($value['summary']) < 150){
-						$str_tmp = ($value['summary']).'<br />'.'<br />'.($value['content']);
-						if(strlen($str_tmp) >= 200){
-							$category_article[$key]['summary'] = substr($str_tmp, 0, 200);
-							$category_article[$key]['summary'] = ($article_tmp[$key]['summary']).'...'; 
-						}else{
-							$category_article[$key]['summary'] = $str_tmp;
-						}
-					}
-				}
-				if((!isset($value['summary']))||($value['summary'] === '')){
-					if(strlen($value['content']) >= 200)
-						$category_article[$key]['summary'] = substr($value['content'], 0, 200);
-					else
-						$category_article[$key]['summary'] = $value['content'];
-				}
-				unset($value['content']);
-			}	
-			$category_article[$key]['categoryid'] = $this->handleArticleCategory($value['categoryid']);
+		$this->view->category_id = $array_info['categoryid'];
+		$article_amount = count($category_article);
+		$page_amount = ceil($article_amount / ARTICLE_AMOUNT_PERPAGE);
+		$page = $array_info['page'];
+		if($page > $page_amount){
+			$category_view = null;
+			$this->view->page_amount = $page_amount;
+			$this->view->category_article = $category_view;
+			$this->view->display(__CLASS__, __FUNCTION__);
+			return ;
+		}
+		$start_index = ($page - 1) * ARTICLE_AMOUNT_PERPAGE;
+		$end_index = $page * ARTICLE_AMOUNT_PERPAGE - 1;
+		$i = $start_index;
+		$article_view = array();
+		for($i, $j = 0;$i <= $end_index;$i ++, $j ++){
+			if(!isset($category_article[$i]))
+				break;
+			if((!isset($category_article[$i]['summary']))||($category_article[$i]['summary'] === '')){
+				$category_article[$i]['summary'] = $category_article[$i]['content'];
+			}
+			$category_article[$i]['categoryinfo'] = $this->handleArticleCategory($category_article[$i]['categoryid']);
+			$category_view[$j] = $category_article[$i];
+			//var_dump($article_view[$j]['articleid']);
 		}
 		//var_dump($category_article);
 		if(!isset($category_article)){
 			header('Location:../error/error_categorynotexists.html');
 		}
-		$this->view->category_article = $category_article;
+		$this->view->page_amount = $page_amount;
+		$this->view->category_article = $category_view;
 		$this->view->display(__CLASS__, __FUNCTION__);
 	}
 	
@@ -189,6 +162,10 @@ class ArticleController extends Controller{
 		$article_detail = $article_detail[0];
 		$article_detail['categoryinfo'] = $this->handleArticleCategory($article_detail['categoryid']);
 		$this->view->article_detail = $article_detail;
+		$this->view->display(__CLASS__, __FUNCTION__);
+	}
+	
+	function about(){
 		$this->view->display(__CLASS__, __FUNCTION__);
 	}
 	
@@ -224,7 +201,7 @@ class ArticleController extends Controller{
 	}
 	
 	function handleArticleCategory($categoryid){
-		if($categoryid == 0){
+		if($categoryid == 1){
 			$categoryname = '未分类';
 		}else{
 			$categoryinfo = $this->article->articleModel_queryOneCategory($categoryid);

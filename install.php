@@ -150,7 +150,7 @@ if(INSTALL_ACCOMPLISH == true){
 									
 							if($install_flag == true){
 								try{
-									if($content = file_get_contents('sql/miaoblog.sql')){
+									if($content = file_get_contents('db/miaoblog.sql')){
 										$sqls = array();
 										$sqls = explode(';', $content);
 										foreach($sqls as $sql){
