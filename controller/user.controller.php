@@ -39,16 +39,16 @@ class UserController extends Controller{
 		if((isset($check_array)) && (!empty($check_array))){
 			$user_info = $check_array[0];
 		}
-		if(!isset($user_info['uid'])){
-			$this->view->msg='usernotexists';
-			$this->view->display(__CLASS__, 'index');
+		if($user_info['username'] != $username){
+			//$this->view->msg='usernotexists';
+			print 0;
 		}else if($user_info['pwd'] !== $password){
-			$this->view->msg='passwordwrong';
-			$this->view->display(__CLASS__, 'index');
+			//$this->view->msg='passwordwrong';
+			print 1;
 		}else{
 			$_SESSION['username']=$username;
 			$this->user->userModel_changeInfo('sys', array('last_access_ip'=>$_SERVER['REMOTE_ADDR']));
-			header('Location:'.'../article/index');
+			print 2;
 		}
 	}
 	

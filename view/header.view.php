@@ -26,7 +26,7 @@
 				</a>
 			</li>
 			<li>
-				<a href="../article/categoryInfo">
+				<a href="../article/about">
 					About
 					<span>关于我们</span>
 				</a>
