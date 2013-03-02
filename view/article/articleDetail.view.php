@@ -7,11 +7,7 @@ PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
 	</head>
 	<body>
 		<div class="for-navbar">
-			<?php 
-				$page_name = '文章查看页面';
-				$page_tooltip = '';
-				include_once(WEBROOT.'view/navbar.view.php'); 
-			?>
+			<?php include_once(WEBROOT.'view/navbar.view.php'); ?>
 		</div>
 		<div class="container">
 			<div class="for-header">

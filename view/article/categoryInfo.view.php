@@ -7,11 +7,7 @@ PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
 	</head>
 	<body>
 		<div class="for-navbar">
-			<?php 
-				$page_name = '分类目录查看页面';
-				$page_tooltip = '';
-				include_once(WEBROOT.'view/navbar.view.php'); 
-			?>
+			<?php include_once(WEBROOT.'view/navbar.view.php'); ?>
 		</div>
 		<div class="container">
 			<div class="for-header">
@@ -24,7 +20,7 @@ PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
 						<div class="blog-sidebar-header"><p class="blog-sidebar-header-content">文章分类</p></div>
 						<ul class="blog-sidebar-list">
 							<?php
-								$page_amount = $this->page_amount;
+								$page_amount = 10;
 								$current_page = ((!isset($_GET['page'])) || ($_GET['page'] == ''))?1:$_GET['page'];
 								$category_info = $this->category_info;
 								foreach($category_info as $value){
@@ -39,6 +35,7 @@ PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
 				</div>
 				<div class="width width3">
 					<div class="for-sidebar">
+						
 						<?php include_once('sidebar.view.php'); ?>
 					</div>
 				</div>

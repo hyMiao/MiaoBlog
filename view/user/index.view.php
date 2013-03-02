@@ -2,42 +2,24 @@
 	<head>
 		<meta charset="utf-8" />
 		<link rel="stylesheet" type="text/css" href="../assets/css/common.css" />
-		<link rel="stylesheet" type="text/css" href="../assets/css/myblog.css" />
 	</head>
 	
 	<body>
-		<div class="login" style="background-color:#f7f7f7;">
+		<div class="login">
 			<?php print $this->msg ?>
-			<div class="blog-sidebar-header">
-				<p class="blog-sidebar-header-content">LogIn</p>
-			</div>
 			<form action="doLogin" method="post" class="form-login">
-				<table class="">
-					<tr>
-						<td>
-							<label class="">Username：</label>
-						</td>
-						<td>
-							<input class="" type="text" name="username" maxlength="20" />
-						</td>
-					</tr>
-					<tr>
-						<td>
-							<label class="">Password：</label>
-						</td>
-						<td>
-							<input class="" type="password" name="password" maxlength="16" />
-						</td>
-					</tr>
-					<tr colspan="2">
-						<td>
-							<input class="btn btn-normal" type="submit" value="LogIn" />
-						</td>
-						<td>
-							<input class="" type="checkbox" name="rememberme" /> Remember me
-						</td>
-					</tr>
-				</table>
+				<div class="form-group horizontal">
+					<label class="form-label">用户名：</label>
+					<input class="form-input" type="text" name="username" maxlength="20" />
+				</div>
+				<div class="form-group horizontal">
+					<label class="form-label">密码：</label>
+					<input class="form-input" type="password" name="password" maxlength="16" />
+				</div>
+				<div class="form-submit">
+					<input class="checkbox" type="checkbox" name="rememberme" /> 记住我
+					<input class="button-submit" type="submit" value="登录" />
+				</div>
 			</form>
 		</div>
 		<div class="copyright">

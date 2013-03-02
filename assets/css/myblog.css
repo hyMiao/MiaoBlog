@@ -8,51 +8,6 @@ body{
 .content{
 	
 }
-.login{
-	background-color:#f7f7f7;
-}
-.login .blog-sidebar-header{
-	padding-bottom:10px;
-}
-.login .blog-sidebar-header-content{
-	margin-left:30px;
-	text-align:left;
-	font:normal 18px/30px 'Microsoft YaHei';
-}
-.login form{
-	text-shadow:1px 2px 2px #aaaaaa;
-}
-.login td{
-	border:none;
-	min-width:100px;
-}
-.login input[type=text], .login input[type=password]{
-	height:30px;
-	width:220px;
-	border-radius:2px;
-	font:normal 16px/30px Arial;
-}
-.login table{
-	margin:0 5px;
-	margin-top:-8px;
-}
-
-
-
-.for-navbar .navbar{
-	color:rgb(77, 81, 99);
-	background: -webkit-gradient(linear, left top, left bottom, from(#f7f7f7), to(rgb(211, 221, 238)));
-	background: -moz-linear-gradient(top, #f7f7f7, rgb(211, 221, 238));
-	filter:  progid:DXImageTransform.Microsoft.gradient(startColorstr='#f7f7f7', endColorstr='#e3e3e3');
-	text-shadow:2px 2px 2px #aaaaaa;
-}
-.for-navbar .navbar a{
-	color:rgb(22, 18, 75);
-}
-.for-navbar .navbar .log:hover{
-	cursor:pointer;
-	color:rgb(66, 94, 247);
-}
 
 .header{
 	margin-top:50px;
@@ -147,9 +102,6 @@ body{
 	margin:0 20px;
 	font-size:13px;
 	color:rgba(59, 68, 102, 0.65);
-}
-.blog-article-info .article-category a:hover{
-	text-decoration:underline;
 }
 
 .blog-article-info .article-label  {
@@ -356,4 +308,3 @@ body{
 .copyright{
 	background-color:#f7f7f7;
 }
-
